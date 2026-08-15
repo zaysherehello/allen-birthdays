@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Allen ♡</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  color:#4b3d3b;
+  background:#f8efe5;
+}
+
+#app{
+  width:100vw;
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+
+.scene{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  opacity:0;
+  transform:translateX(35px);
+  pointer-events:none;
+  transition:.7s ease;
+}
+
+.scene.active{
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:auto;
+}
+
+.card{
+  width:min(92vw,650px);
+  max-height:90vh;
+  overflow:auto;
+  padding:28px;
+  text-align:center;
+  background:#fffaf3;
+  border:2px dashed #9b7b70;
+  border-radius:28px;
+  box-shadow:0 15px 40px rgba(80,50,40,.15);
+}
+
+h1{
+  font-size:clamp(38px,10vw,62px);
+  margin:12px 0;
+}
+
+h2{
+  font-size:clamp(27px,7vw,44px);
+  margin:10px 0;
+}
+
+p{
+  font-size:clamp(16px,4.5vw,21px);
+  line-height:1.5;
+}
+
+.btn{
+  border:0;
+  border-radius:999px;
+  padding:14px 23px;
+  margin:8px;
+  background:#6d9b78;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 5px 0 #4f7659;
+}
+
+.btn:active{
+  transform:translateY(4px);
+  box-shadow:0 1px 0 #4f7659;
+}
+
+.stars{
+  font-size:30px;
+  letter-spacing:8px;
+}
+
+.small{
+  font-size:14px;
+  opacity:.7;
+}
+
+/* progress */
+
+#barWrap{
+  position:absolute;
+  top:8px;
+  left:10px;
+  right:10px;
+  height:5px;
+  background:rgba(255,255,255,.6);
+  z-index:100;
+  border-radius:10px;
+}
+
+#bar{
+  width:0%;
+  height:100%;
+  background:#6d9b78;
+  transition:.5s;
+}
+
+/* park */
+
+.park{
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  background:linear-gradient(#dcebdc 0 57%,#b9d6a7 57%);
+}
+
+.sun{
+  position:absolute;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#f2ce82;
+  top:8%;
+  right:8%;
+}
+
+.tree{
+  position:absolute;
+  font-size:70px;
+  z-index:-2;
+}
+
+.tree1{left:3%;top:18%}
+.tree2{right:3%;top:23%}
+
+.pond{
+  width:min(520px,88vw);
+  height:170px;
+  margin:15px auto;
+  border-radius:50%;
+  background:#a8ced0;
+  border:4px solid #668f91;
+  position:relative;
+  overflow:hidden;
+}
+
+.pond::after{
+  content:"🐟   🐟";
+  position:absolute;
+  left:35%;
+  top:48%;
+  font-size:26px;
+  animation:fish 3s infinite alternate;
+}
+
+@keyframes fish{
+  from{transform:translateX(-15px)}
+  to{transform:translateX(35px)}
+}
+
+/* characters */
+
+.doodle{
+  width:230px;
+  height:180px;
+  margin:10px auto;
+  position:relative;
+}
+
+.person{
+  position:absolute;
+  bottom:5px;
+  width:60px;
+  height:105px;
+  border:4px solid #4b4140;
+  border-radius:32px 32px 20px 20px;
+  background:#fff7ec;
+}
+
+.person:before{
+  content:"";
+  position:absolute;
+  width:55px;
+  height:55px;
+  left:-1px;
+  top:-49px;
+  border:4px solid #4b4140;
+  border-radius:50%;
+  background:#f2c5a7;
+}
+
+.person:after{
+  content:"• ᴗ •";
+  position:absolute;
+  top:-24px;
+  left:8px;
+  font-size:13px;
+}
+
+.me{left:30px}
+
+.allen{
+  right:30px;
+  height:114px;
+  background:#dbe8de;
+}
+
+.allen:before{
+  background:#c99578;
+}
+
+/* hand */
+
+.hand{
+  font-size:65px;
+  animation:bounce 1s infinite alternate;
+}
+
+@keyframes bounce{
+  to{transform:translateY(8px)}
+}
+
+/* flowers */
+
+.flowers{
+  font-size:32px;
+  letter-spacing:7px;
+}
+
+/* choices */
+
+.choice{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+}
+
+.choice button{
+  padding:11px 15px;
+  border:2px solid #876d65;
+  border-radius:17px;
+  background:#fffaf3;
+  cursor:pointer;
+}
+
+/* popsicle */
+
+.ice{
+  font-size:80px;
+}
+
+/* cat */
+
+.cat{
+  font-size:70px;
+  animation:catWalk 2s infinite alternate;
+}
+
+@keyframes catWalk{
+  from{transform:translateX(-12px)}
+  to{transform:translateX(12px)}
+}
+
+/* fireflies */
+
+.firefly{
+  position:absolute;
+  font-size:18px;
+  animation:float 3s infinite alternate;
+}
+
+.f1{left:12%;top:30%}
+.f2{left:75%;top:28%}
+.f3{left:25%;top:70%}
+.f4{right:12%;top:65%}
+
+@keyframes float{
+  from{transform:translateY(0);opacity:.4}
+  to{transform:translateY(-25px);opacity:1}
+}
+
+/* gift */
+
+.gift{
+  font-size:100px;
+  cursor:pointer;
+  animation:gift 1s infinite alternate;
+}
+
+@keyframes gift{
+  to{transform:scale(1.08) rotate(2deg)}
+}
+
+/* cake */
+
+.cake{
+  font-size:100px;
+  cursor:pointer;
+}
+
+.flame{
+  animation:flicker .4s infinite alternate;
+}
+
+@keyframes flicker{
+  from{opacity:.5}
+  to{opacity:1}
+}
+
+/* sunset/night */
+
+.sunset{
+  background:linear-gradient(#f2c79f 0 57%,#a9c58f 57%);
+}
+
+.night{
+  background:linear-gradient(#625b85 0 57%,#687e69 57%);
+}
+
+/* stars */
+
+.skyStar{
+  position:absolute;
+  color:white;
+  font-size:20px;
+  animation:twinkle 1.5s infinite alternate;
+}
+
+.s1{left:12%;top:15%}
+.s2{left:35%;top:10%}
+.s3{right:20%;top:17%}
+.s4{right:8%;top:35%}
+.s5{left:22%;top:35%}
+
+@keyframes twinkle{
+  from{opacity:.3}
+  to{opacity:1}
+}
+
+/* photos */
+
+.photoBox{
+  border:2px dashed #9b7b70;
+  padding:20px;
+  border-radius:20px;
+  margin:15px;
+}
+
+.photoBox input{
+  max-width:100%;
+}
+
+/* final */
+
+.heart{
+  font-size:70px;
+  animation:heart .7s ease;
+}
+
+@keyframes heart{
+  from{transform:scale(0)}
+  to{transform:scale(1)}
+}
+
+/* toast */
+
+#toast{
+  position:absolute;
+  bottom:22px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#4b3d3b;
+  color:white;
+  padding:10px 17px;
+  border-radius:999px;
+  opacity:0;
+  transition:.3s;
+  z-index:200;
+}
+
+#toast.show{
+  opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<div id="barWrap">
+<div id="bar"></div>
+</div>
+
+
+<!-- 1 -->
+
+<section class="scene active" id="s0">
+<div class="card">
+
+<div class="stars">✦ ♡ ✦</div>
+
+<h1>Happy Birthday, Allen! ♡</h1>
+
+<p>
+Today I'm taking you on a little stroll in the park.
+</p>
+
+<p>
+I know that on your birthdays, you usually go to the park
+with your mom and a popsicle.
+</p>
+
+<p>
+Since we're far apart, I wanted to make our own little
+birthday park day. ♡
+</p>
+
+<button class="btn" onclick="next()">
+Come with me →
+</button>
+
+</div>
+</section>
+
+
+<!-- 2 -->
+
+<section class="scene" id="s1">
+<div class="card">
+
+<h2>YOU'RE INVITED! 🌷</h2>
+
+<div class="ticket">
+🎟️ PARK ADMISSION
+
+<h2>FREE</h2>
+
+Because the owner loves you. ♡
+</div>
+
+<div class="doodle">
+<div class="person me"></div>
+<div class="person allen"></div>
+</div>
+
+<button class="btn" onclick="next()">
+Enter the park →
+</button>
+
+</div>
+</section>
+
+
+<!-- 3 -->
+
+<section class="scene" id="s2">
+<div class="card">
+
+<div class="hand">🫶</div>
+
+<h2>Do you wanna hold my hand?</h2>
+
+<p>Put your finger here ♡</p>
+
+<button class="btn" onclick="holdHand()">
+Hold my hand
+</button>
+
+</div>
+</section>
+
+
+<!-- 4 -->
+
+<section class="scene" id="s3">
+
+<div class="park"></div>
+<div class="sun"></div>
+<div class="tree tree1">🌳</div>
+<div class="tree tree2">🌳</div>
+
+<div class="firefly f1">✨</div>
+<div class="firefly f2">✨</div>
+<div class="firefly f3">✨</div>
+<div class="firefly f4">✨</div>
+
+<div class="card">
+
+<h2>Welcome to our park ♡</h2>
+
+<div class="pond"></div>
+
+<div class="flowers">
+🌷 🌿 🌼 🌿 🌷
+</div>
+
+<p>
+Look! There's the pond.
+</p>
+
+<div class="cat">🐈‍⬛</div>
+
+<p class="small">
+Oh... and apparently we have a tiny visitor.
+</p>
+
+<button class="btn" onclick="next()">
+Let's explore →
+</button>
+
+</div>
+</section>
+
+
+<!-- 5 -->
+
+<section class="scene" id="s4">
+<div class="card">
+
+<h2>Popsicle time! 🍧</h2>
+
+<p>
+Just like your usual birthday.
+Except this time I'm getting one for you. ♡
+</p>
+
+<div class="choice">
+
+<button onclick="popsicle('Strawberry 🍓')">
+🍓 Strawberry
+</button>
+
+<button onclick="popsicle('Mango 🥭')">
+🥭 Mango
+</button>
+
+<button onclick="popsicle('Lemon 🍋')">
+🍋 Lemon
+</button>
+
+</div>
+
+<div class="ice">🍧</div>
+
+<p id="flavor"></p>
+
+<button
+class="btn"
+id="iceNext"
+style="display:none"
+onclick="next()">
+
+Thank you! ♡ →
+
+</button>
+
+</div>
+</section>
+
+
+<!-- 6 -->
+
+<section class="scene" id="s5">
+<div class="card">
+
+<h2>A little walk 🌿</h2>
+
+<div class="doodle">
+<div class="person me"></div>
+<div class="person allen"></div>
+</div>
+
+<p>
+We're walking around the pond,
+still holding hands. ♡
+</p>
+
+<div class="choice">
+
+<button onclick="message('The flowers are so pretty. 🌷')">
+🌷
+</button>
+
+<button onclick="message('The fish said hello! 🐟')">
+🐟
+</button>
+
+<button onclick="message('A bird flew over us! 🐦')">
+🐦
+</button>
+
+</div>
+
+<p id="parkMessage"></p>
+
+<button class="btn" onclick="next()">
+Keep walking →
+</button>
+
+</div>
+</section>
+
+
+<!-- 7 MUSIC -->
+
+<section class="scene" id="s6">
+<div class="card">
+
+<h2>Wait... one more thing 🎵</h2>
+
+<p>
+I picked a song for our little walk.
+</p>
+
+<button class="btn"
+onclick="openSong()">
+
+🎵 Best Friend ♡
+</button>
+
+<p class="small">
+Rex Orange County
+</p>
+
+<button class="btn" onclick="next()">
+Continue →
+</button>
+
+</div>
+</section>
+
+
+<!-- 8 -->
+
+<section class="scene" id="s7">
+
+<div class="park sunset"></div>
+
+<div class="card">
+
+<h2>Let's rest for a bit. ♡</h2>
+
+<div style="font-size:85px">🪑</div>
+
+<p>
+I know this isn't the same as actually being there...
+</p>
+
+<p>
+But I wanted to give you a little birthday park day of our own.
+</p>
+
+<p>
+Even though we're far apart,
+I'd still want to spend your birthday with you. ♡
+</p>
+
+<button class="btn" onclick="next()">
+One more thing... →
+</button>
+
+</div>
+</section>
+
+
+<!-- 9 GIFT -->
+
+<section class="scene" id="s8">
+<div class="card">
+
+<h2>I brought you something. 🎁</h2>
+
+<p>
+Tap the gift.
+</p>
+
+<div class="gift" onclick="openGift()">
+🎁
+</div>
+
+<p id="giftMessage"></p>
+
+<button
+class="btn"
+id="giftNext"
+style="display:none"
+onclick="next()">
+
+Open it →
+</button>
+
+</div>
+</section>
+
+
+<!-- 10 CAKE -->
+
+<section class="scene" id="s9">
+<div class="card">
+
+<h2>And obviously... CAKE! 🎂</h2>
+
+<div
+class="cake"
+onclick="blowCake()"
+id="cake">
+
+🎂
+</div>
+
+<p>
+Tap the candle to blow it out.
+</p>
+
+<p id="cakeMessage"></p>
+
+<button
+class="btn"
+id="cakeNext"
+style="display:none"
+onclick="next()">
+
+Make a wish →
+</button>
+
+</div>
+</section>
+
+
+<!-- 11 LETTER -->
+
+<section class="scene" id="s10">
+<div class="card">
+
+<div style="font-size:55px">💌</div>
+
+<h2>A little letter for you</h2>
+
+<p>
+Dear Allen,
+</p>
+
+<p>
+I hope your birthday is filled with happiness,
+good memories, good food, and lots of reasons to smile.
+</p>
+
+<p>
+I may not be able to physically walk beside you today,
+but I hope this little place reminds you that someone
+far away is thinking about you.
+</p>
+
+<p>
+Thank you for being you.
+♡
+</p>
+
+<button class="btn" onclick="next()">
+Keep going →
+</button>
+
+</div>
+</section>
+
+
+<!-- 12 NIGHT -->
+
+<section class="scene" id="s11">
+
+<div class="park night"></div>
+
+<div class="skyStar s1">✦</div>
+<div class="skyStar s2">✧</div>
+<div class="skyStar s3">✦</div>
+<div class="skyStar s4">✧</div>
+<div class="skyStar s5">✦</div>
+
+<div class="card">
+
+<h2>It's getting late... 🌙</h2>
+
+<div style="font-size:70px">🌙</div>
+
+<p>
+The park is getting quiet.
+The stars are coming out.
+</p>
+
+<p>
+Maybe we should head home...
+</p>
+
+<button class="btn" onclick="next()">
+One last thing →
+</button>
+
+</div>
+</section>
+
+
+<!-- 13 -->
+
+<section class="scene" id="s12">
+<div class="card">
+
+<div class="stars">
+✦ ✧ ♡ ✧ ✦
+</div>
+
+<div class="doodle">
+<div class="person me"></div>
+<div class="person allen"></div>
+</div>
+
+<h2>
+Happy Birthday, my twin. ♡
+</h2>
+
+<p>
+Until we can actually go to the park together,
+I hope this little one makes you smile.
+</p>
+
+<button class="btn" onclick="finale()">
+Tap our hands ♡
+</button>
+
+<div id="final"></div>
+
+</div>
+</section>
+
+
+<div id="toast"></div>
+
+</div>
+
+
+<script>
+
+let current=0;
+
+const scenes=
+document.querySelectorAll(".scene");
+
+
+function show(n){
+
+if(n<0 || n>=scenes.length)return;
+
+scenes.forEach((s,i)=>{
+s.classList.toggle("active",i===n);
+});
+
+current=n;
+
+document.getElementById("bar").style.width=
+(n/(scenes.length-1)*100)+"%";
+
+}
+
+
+function next(){
+
+if(current<scenes.length-1){
+show(current+1);
+}
+
+}
+
+
+function holdHand(){
+
+showToast("You got my hand 🫶");
+
+setTimeout(()=>{
+next();
+},900);
+
+}
+
+
+function popsicle(flavor){
+
+document.getElementById("flavor").innerText=
+"You chose "+flavor+" for Allen! ♡";
+
+document.getElementById("iceNext").style.display=
+"inline-block";
+
+showToast("Birthday popsicle acquired! 🍧");
+
+}
+
+
+function message(text){
+
+document.getElementById("parkMessage").innerText=text;
+
+showToast("♡");
+
+}
+
+
+function openGift(){
+
+document.getElementById("giftMessage").innerText=
+"Inside is a little reminder that you're loved. 💗";
+
+document.getElementById("giftNext").style.display=
+"inline-block";
+
+showToast("A gift just for you 🎁");
+
+}
+
+
+function blowCake(){
+
+document.getElementById("cake").innerHTML=
+"🍰";
+
+document.getElementById("cakeMessage").innerText=
+"The candle is out! Make your birthday wish. ✨";
+
+document.getElementById("cakeNext").style.display=
+"inline-block";
+
+showToast("Happy birthday!! 🎂");
+
+}
+
+
+function finale(){
+
+document.getElementById("final").innerHTML=
+'<div class="heart">💗</div>'+
+'<p>I'll always be cheering for you. ♡</p>'+
+'<p>Happy Birthday, Allen.</p>'+
+'<div style="font-size:40px">🌷🫶🌷</div>';
+
+showToast("A little piece of my heart ♡");
+
+}
+
+
+function showToast(text){
+
+const t=
+document.getElementById("toast");
+
+t.innerText=text;
+
+t.classList.add("show");
+
+clearTimeout(window.timer);
+
+window.timer=setTimeout(()=>{
+t.classList.remove("show");
+},1800);
+
+}
+
+
+/*
+This opens the official music/service search
+rather than illegally hosting the copyrighted
+song on the website.
+*/
+
+function openSong(){
+
+window.open(
+"https://www.youtube.com/results?search_query=Rex+Orange+County+Best+Friend",
+"_blank"
+);
+
+}
+
+</script>
+
+</body>
+</html>
